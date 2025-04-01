@@ -1,7 +1,6 @@
 server:
-  port: 6969
+  port: ${PORT}
   assets-path: ./assets
-  env_file: .
 
 theme:
   background-color: 240 21 15
