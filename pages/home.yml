@@ -1,0 +1,126 @@
+- name: Home
+  columns:
+    - size: small
+      widgets:
+        - type: search
+          search-engine: duckduckgo
+          autofocus: true
+          bangs:
+            - title: YouTube
+              shortcut: "!y"
+              url: https://www.youtube.com/results?search_query={QUERY}
+
+        - type: clock
+          hour-format: 24h
+          timezones:
+            - timezone: Europe/Amsterdam
+              label: Klompen
+            - timezone: UTC
+              label: Zulu
+            - timezone: America/New_York
+              label: Syam
+            - timezone: America/Los_Angeles
+              label: Hayward
+
+        - type: twitch-channels
+          title: Twitch!
+          channels:
+            - bashbunni
+            - ${SNOW}
+            - theprimeagen
+
+    - size: full
+      widgets:
+        - type: split-column
+          widgets:
+          - type: bookmarks
+            groups:
+              - hide-arrow: true
+                same-tab: true
+                links:
+                  - title: Abaza
+                    url: https://abaza.dev
+                    icon: /assets/images/abaza738.png
+
+                  - title: YouTube
+                    url: https://youtube.com
+                    icon: si:youtube
+
+                  - title: GitHub
+                    url: https://github.com
+                    icon: si:github
+
+                  - title: Reddit
+                    url: https://reddit.com
+                    icon: si:reddit
+
+                  - title: ProtonMail
+                    url: https://mail.protonmail.com
+                    icon: si:protonmail
+
+                  - title: POSCON HQ
+                    url: https://hq.poscon.net
+                    icon: /assets/images/poscon.ico
+
+          - type: bookmarks
+            groups:
+              - hide-arrow: true
+                same-tab: true
+                links:
+                  - title: GitLab POSCON
+                    url: https://gitlab.poscon.com
+                    icon: si:gitlab
+
+                  - title: Cloudflare
+                    url: https://dash.cloudflare.com
+                    icon: si:cloudflare
+
+                  - title: Contabo Dashboard
+                    url: https://my.contabo.com
+                    icon: si:contabo
+
+                  - title: Simbrief
+                    url: https://www.simbrief.com/home
+                    icon: /assets/images/simbrief.png
+
+                  - title: VAMSYS
+                    url: https://vamsys.io
+                    icon: /assets/images/vamsys.png
+
+                  - title: Flightsim.to
+                    url: https://flightsim.to
+                    icon: /assets/images/flightsim.to.svg
+
+        - type: videos
+          title: YouTube
+          limit: 10
+          channels:
+            - UCKALXb2rTLNwVgH9DHVVPLw # Aviation101
+            - UC9H0HzpKf5JlazkADWnW1Jw # bashbunni
+            - UCsBjURrPoezykLs9EqgamOA # Fireship
+            - UCB_qr75-ydFVKSF9Dmo6izg # Formula 1 channel
+            - UCJXa3_WNNmIpewOtCHf3B0g # LaurieWired
+            - UC8ENHE5xdFSwx71u3fDH5Xw # The Primeagen
+            - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
+
+    - size: small
+      widgets:
+        - type: weather
+          title: Amman
+          location: Amman, Jordan
+          units: metric
+          hour-format: 24h
+          hide-location: true
+
+        - type: releases
+          title: GitHub
+          cache: 1d
+          token: ${GITHUB_TOKEN}
+          repositories:
+            - glanceapp/glance
+            - jesseduffield/lazygit
+            - jesseduffield/lazydocker
+            - nuxt/nuxt
+            - nuxt/ui
+            - tauri-apps/tauri
+            - vuejs/core
