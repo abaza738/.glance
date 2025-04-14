@@ -10,6 +10,8 @@ theme:
 
 pages:
   !include: pages/home.yml
+  !include: pages/f1.yml
+
   # Add more pages here:
   # - name: Your page name
   #   columns:
