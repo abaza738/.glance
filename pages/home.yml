@@ -9,6 +9,9 @@
             - title: YouTube
               shortcut: "!y"
               url: https://www.youtube.com/results?search_query={QUERY}
+            - title: Translate
+              shortcut: "!t"
+              url: https://translate.google.com/?sl=auto&tl=en&text={QUERY}&op=translate
 
         - type: clock
           hour-format: 24h
