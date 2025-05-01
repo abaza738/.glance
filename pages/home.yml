@@ -29,6 +29,7 @@
           title: Twitch!
           channels:
             - bashbunni
+            - danielroe
             - ${SNOW}
             - theprimeagen
 
