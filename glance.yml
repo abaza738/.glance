@@ -3,12 +3,11 @@ server:
   assets-path: ./assets
 
 theme:
-  background-color: 240 21 15
-  contrast-multiplier: 0.8
-  primary-color: 217 92 83
-  positive-color: 115 54 76
-  negative-color: 347 70 65
-  custom-css-file: /assets/style.css
+  background-color: 230 15 8
+  contrast-multiplier: 1.05
+  primary-color: 210 30 38
+  positive-color: 170 25 42
+  negative-color: 350 30 48
 
 pages:
   !include: pages/home.yml
