@@ -3,6 +3,7 @@ server:
   assets-path: ./assets
 
 theme:
+  custom-css-file: /assets/style.css
   background-color: 230 15 8
   contrast-multiplier: 1.05
   primary-color: 210 30 38

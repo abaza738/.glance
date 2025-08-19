@@ -1,0 +1,25 @@
+.bookmarks-group {
+  ul.list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1rem;
+
+    li > div.flex.items-center.gap-10 {
+      text-align: center;
+      flex-direction: column;
+
+      .bookmarks-icon-container {
+        padding: 1.5rem;
+
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      a.bookmarks-link {
+        font-size: 12px;
+      }
+    }
+  }
+}
