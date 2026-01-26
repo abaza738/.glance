@@ -66,17 +66,17 @@
                   url: https://hq.poscon.net
                   icon: /assets/images/poscon.ico
 
-                - title: GitLab POSCON
-                  url: https://gitlab.poscon.com
-                  icon: si:gitlab
-
                 - title: Cloudflare
                   url: https://dash.cloudflare.com
                   icon: si:cloudflare
 
-                - title: Contabo Dashboard
-                  url: https://my.contabo.com
-                  icon: si:contabo
+                - title: Claude AI
+                  url: https://claude.ai
+                  icon: si:anthropic
+
+                - title: ChatGPT
+                  url: https://chatgpt.com
+                  icon: si:openai
 
                 - title: Simbrief
                   url: https://www.simbrief.com/home
