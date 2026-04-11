@@ -2,17 +2,42 @@ server:
   port: ${PORT}
   assets-path: ./assets
 
+# --- THEME: Ember (warm amber/copper terminal glow) ---
 theme:
   custom-css-file: /assets/style.css
-  background-color: 230 15 8
-  contrast-multiplier: 1.05
-  primary-color: 210 30 38
-  positive-color: 170 25 42
-  negative-color: 350 30 48
+  # Default theme: tokyo-night
+  background-color: 235 20 7
+  contrast-multiplier: 1.15
+  primary-color: 214 88 78
+  positive-color: 118 50 55
+  negative-color: 358 65 62
+
+  presets:
+    catppuccin-mocha:
+      background-color: 240 21 7
+      contrast-multiplier: 1.1
+      primary-color: 267 80 70
+      positive-color: 115 52 58
+      negative-color: 343 78 62
+
+    ember:
+      background-color: 20 12 6
+      contrast-multiplier: 1.2
+      primary-color: 35 90 62
+      positive-color: 85 65 52
+      negative-color: 0 72 58
+
+    everforest:
+      background-color: 135 14 8
+      contrast-multiplier: 1.15
+      primary-color: 142 40 55
+      positive-color: 85 55 55
+      negative-color: 5 58 58
 
 pages:
   !include: pages/home.yml
   !include: pages/f1.yml
+  !include: pages/news.yml
 
   # Add more pages here:
   # - name: Your page name

@@ -2,16 +2,21 @@
   columns:
     - size: small
       widgets:
-        - type: search
-          search-engine: duckduckgo
-          autofocus: true
-          bangs:
-            - title: YouTube
-              shortcut: "!y"
-              url: https://www.youtube.com/results?search_query={QUERY}
-            - title: Translate
-              shortcut: "!t"
-              url: https://translate.google.com/?sl=auto&tl=en&text={QUERY}&op=translate
+        - type: weather
+          title: Amman
+          location: Amman, Jordan
+          units: metric
+          hour-format: 24h
+          hide-location: true
+
+        - type: custom-api
+          title: OJAI METAR
+          cache: 30m
+          url: https://aviationweather.gov/api/data/metar?ids=OJAI,OJAM&format=json
+          template: |
+            {{ $rt := .JSON.String "0.reportTime" }}<p class="color-subdue size-h6">{{ slice $rt 11 13 }}{{ slice $rt 14 16 }}Z</p>
+            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "0.rawOb" }}</p>
+            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "1.rawOb" }}</p>
 
         - type: clock
           hour-format: 24h
@@ -27,16 +32,19 @@
             - timezone: Australia/Brisbane
               label: Pookie Land
 
-        - type: twitch-channels
-          title: Twitch!
-          channels:
-            - bashbunni
-            - danielroe
-            - ${SNOW}
-            - theprimeagen
-
     - size: full
       widgets:
+        - type: search
+          search-engine: duckduckgo
+          autofocus: true
+          bangs:
+            - title: YouTube
+              shortcut: "!y"
+              url: https://www.youtube.com/results?search_query={QUERY}
+            - title: Translate
+              shortcut: "!t"
+              url: https://translate.google.com/?sl=auto&tl=en&text={QUERY}&op=translate
+
         - type: bookmarks
           groups:
             - hide-arrow: true
@@ -103,12 +111,46 @@
 
     - size: small
       widgets:
-        - type: weather
-          title: Amman
-          location: Amman, Jordan
-          units: metric
-          hour-format: 24h
-          hide-location: true
+        - type: custom-api
+          title: Prayer Times · Amman
+          cache: 6h
+          url: https://api.aladhan.com/v1/timingsByCity?city=Amman&country=Jordan&method=3
+          template: |
+            {{ $now := now | formatTime "15:04" }}
+            {{ $fajr := .JSON.String "data.timings.Fajr" }}
+            {{ $dhuhr := .JSON.String "data.timings.Dhuhr" }}
+            {{ $asr := .JSON.String "data.timings.Asr" }}
+            {{ $maghrib := .JSON.String "data.timings.Maghrib" }}
+            {{ $isha := .JSON.String "data.timings.Isha" }}
+            {{ $next := "Fajr" }}
+            {{ if gt $now $isha }}{{ $next = "Fajr" }}
+            {{ else if gt $now $maghrib }}{{ $next = "Isha" }}
+            {{ else if gt $now $asr }}{{ $next = "Maghrib" }}
+            {{ else if gt $now $dhuhr }}{{ $next = "Asr" }}
+            {{ else if gt $now $fajr }}{{ $next = "Dhuhr" }}
+            {{ end }}
+            <div class="flex flex-column gap-8">
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Fajr" }} color-subdue{{ end }}">Fajr</span>
+                <span{{ if eq $next "Fajr" }} class="color-primary"{{ end }}>{{ $fajr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Dhuhr" }} color-subdue{{ end }}">Dhuhr</span>
+                <span{{ if eq $next "Dhuhr" }} class="color-primary"{{ end }}>{{ $dhuhr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Asr" }} color-subdue{{ end }}">Asr</span>
+                <span{{ if eq $next "Asr" }} class="color-primary"{{ end }}>{{ $asr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Maghrib" }} color-subdue{{ end }}">Maghrib</span>
+                <span{{ if eq $next "Maghrib" }} class="color-primary"{{ end }}>{{ $maghrib }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Isha" }} color-subdue{{ end }}">Isha</span>
+                <span{{ if eq $next "Isha" }} class="color-primary"{{ end }}>{{ $isha }}</span>
+              </div>
+            </div>
 
         - type: releases
           title: GitHub
@@ -122,3 +164,11 @@
             - nuxt/ui
             - tauri-apps/tauri
             - vuejs/core
+
+        - type: twitch-channels
+          title: Twitch!
+          channels:
+            - bashbunni
+            - danielroe
+            - ${SNOW}
+            - theprimeagen
