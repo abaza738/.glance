@@ -98,6 +98,23 @@
                   url: https://flightsim.to
                   icon: /assets/images/flightsim.to.svg
 
+        - type: split-column
+          max-columns: 2
+          widgets:
+            - type: iframe
+              title: Focus
+              source: http://localhost:6969/assets/focus.html
+              height: 240
+            - type: iframe
+              title: Streaks
+              source: http://localhost:6969/assets/streaks.html
+              height: 240
+
+        - type: iframe
+          title: Progress
+          source: http://localhost:6969/assets/heatmap.html
+          height: 190
+
         - type: videos
           title: YouTube
           limit: 10
@@ -111,16 +128,6 @@
 
     - size: small
       widgets:
-        - type: iframe
-          title: Focus
-          source: http://localhost:6969/assets/focus.html
-          height: 240
-
-        - type: iframe
-          title: Progress
-          source: http://localhost:6969/assets/heatmap.html
-          height: 145
-
         - type: custom-api
           title: Prayer Times · Amman
           cache: 6h
