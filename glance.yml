@@ -2,6 +2,12 @@ server:
   port: ${PORT}
   assets-path: ./assets
 
+auth:
+  secret-key: ${SECRET_KEY}
+  users:
+    maher:
+      password: ${PASSWORD}
+
 # --- THEME: Ember (warm amber/copper terminal glow) ---
 theme:
   custom-css-file: /assets/style.css
