@@ -111,6 +111,16 @@
 
     - size: small
       widgets:
+        - type: iframe
+          title: Focus
+          source: http://localhost:6969/assets/focus.html
+          height: 240
+
+        - type: iframe
+          title: Progress
+          source: http://localhost:6969/assets/heatmap.html
+          height: 145
+
         - type: custom-api
           title: Prayer Times · Amman
           cache: 6h

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: rgb(14, 15, 21);
+      color: hsl(235, 15%, 62%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      overflow: hidden;
+    }
+
+    main {
+      background: #12131c;
+      border-radius: 8px;
+      border: 1px solid rgb(22, 23, 34);
+      padding: 16px;
+    }
+
+    .day-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: hsl(235, 12%, 35%);
+      margin-bottom: 5px;
+    }
+
+    .focus-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #96c0f8;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .focus-hint {
+      font-size: 11px;
+      color: hsl(235, 12%, 42%);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      border-top: 1px solid hsl(235, 20%, 15%);
+      padding-top: 10px;
+    }
+
+    .pillar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0.35;
+    }
+
+    .pillar.active { opacity: 1; }
+
+    .pillar-name {
+      font-size: 12px;
+      color: hsl(235, 15%, 55%);
+      font-weight: 500;
+    }
+
+    .pillar.active .pillar-name { color: hsl(214, 88%, 78%); }
+
+    .pillar-days {
+      font-size: 10px;
+      color: hsl(235, 12%, 32%);
+      letter-spacing: 0.04em;
+    }
+
+    .pillar.active .pillar-days { color: hsl(214, 45%, 55%); }
+
+    .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: hsl(214, 88%, 78%);
+      margin-right: 8px;
+      vertical-align: middle;
+      opacity: 0;
+    }
+
+    .pillar.active .dot { opacity: 1; }
+
+    .done-btn {
+      display: none;
+      margin-top: 12px;
+      width: 100%;
+      padding: 7px;
+      background: transparent;
+      border: 1px solid hsl(235, 20%, 22%);
+      border-radius: 6px;
+      color: hsl(235, 12%, 42%);
+      font-family: inherit;
+      font-size: 11px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .done-btn:hover:not(.done) {
+      border-color: hsl(214, 88%, 78%);
+      color: hsl(214, 88%, 78%);
+    }
+
+    .done-btn.done {
+      border-color: #4a9e72;
+      color: #4a9e72;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="day-label" id="day-label"></div>
+    <div class="focus-name" id="focus-name"></div>
+    <div class="focus-hint" id="focus-hint"></div>
+
+    <div class="pillars">
+      <div class="pillar" id="p-golang">
+        <span class="pillar-name"><span class="dot"></span>GoLang</span>
+        <span class="pillar-days">Sun · Tue · Thu · Sat</span>
+      </div>
+      <div class="pillar" id="p-circassian">
+        <span class="pillar-name"><span class="dot"></span>Circassian</span>
+        <span class="pillar-days">Mon · Wed</span>
+      </div>
+      <div class="pillar" id="p-sports">
+        <span class="pillar-name"><span class="dot"></span>Sports</span>
+        <span class="pillar-days">Fri</span>
+      </div>
+    </div>
+
+    <button class="done-btn" id="done-btn">Mark done</button>
+  </main>
+
+  <script>
+    const LS_KEY = 'growth_sessions';
+
+    function localISO(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function getSessions() {
+      try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    const schedule = {
+      0: { name: 'GoLang',     hint: '1 session · Tour, Boot.dev, tests, or just code.',    pillar: 'golang' },
+      1: { name: 'Circassian', hint: '1 session · A few pages from the book.',              pillar: 'circassian' },
+      2: { name: 'GoLang',     hint: '1 session · Tour, Boot.dev, tests, or just code.',    pillar: 'golang' },
+      3: { name: 'Circassian', hint: '1 session · Or free if the energy is low.',           pillar: 'circassian' },
+      4: { name: 'GoLang',     hint: '1 session · Last workday — even a short one counts.', pillar: 'golang' },
+      5: { name: 'Protected',  hint: 'Friday prayer · Football if it happens tonight.',     pillar: 'sports' },
+      6: { name: 'Free Day',   hint: 'Rest, a walk, or a bonus GoLang session — your call.', pillar: null },
+    };
+
+    const now      = new Date();
+    const day      = now.getDay();
+    const today    = schedule[day];
+    const todayISO = localISO(now);
+
+    document.getElementById('day-label').textContent  = days[day];
+    document.getElementById('focus-name').textContent = today.name;
+    document.getElementById('focus-hint').textContent = today.hint;
+
+    if (today.pillar) {
+      document.getElementById('p-' + today.pillar).classList.add('active');
+
+      const btn      = document.getElementById('done-btn');
+      const sessions = getSessions();
+      const done     = sessions.some(s => s.date === todayISO && s.pillar === today.pillar);
+
+      btn.style.display = 'block';
+
+      if (done) {
+        btn.textContent = '✓ Done today';
+        btn.classList.add('done');
+      }
+
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('done')) return;
+        const all = getSessions();
+        all.push({ date: todayISO, pillar: today.pillar });
+        localStorage.setItem(LS_KEY, JSON.stringify(all));
+        btn.textContent = '✓ Done today';
+        btn.classList.add('done');
+      });
+    }
+  </script>
+</body>
+</html>
