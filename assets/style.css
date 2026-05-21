@@ -26,6 +26,8 @@
 .bookmarks-group {
   ul.list {
     li > div.flex.items-center.gap-10 {
+      position: relative;
+
       .bookmarks-icon-container {
         transition: box-shadow 0.2s ease, transform 0.2s ease;
 
