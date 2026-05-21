@@ -45,75 +45,70 @@
               shortcut: "!t"
               url: https://translate.google.com/?sl=auto&tl=en&text={QUERY}&op=translate
 
-        - type: bookmarks
-          groups:
-            - hide-arrow: true
-              same-tab: true
-              links:
-                - title: Abaza
-                  url: https://abaza.dev
-                  icon: /assets/images/abaza738.png
-
-                - title: YouTube
-                  url: https://youtube.com
-                  icon: si:youtube
-
-                - title: GitHub
-                  url: https://github.com/feed/
-                  icon: si:github
-
-                - title: Reddit
-                  url: https://reddit.com
-                  icon: si:reddit
-
-                - title: ProtonMail
-                  url: https://mail.protonmail.com
-                  icon: si:protonmail
-
-                - title: POSCON HQ
-                  url: https://hq.poscon.net
-                  icon: /assets/images/poscon.ico
-
-                - title: Cloudflare
-                  url: https://dash.cloudflare.com
-                  icon: si:cloudflare
-
-                - title: Claude AI
-                  url: https://claude.ai
-                  icon: si:anthropic
-
-                - title: ChatGPT
-                  url: https://chatgpt.com
-                  icon: si:openai
-
-                - title: Simbrief
-                  url: https://www.simbrief.com/home
-                  icon: /assets/images/simbrief.png
-
-                - title: VAMSYS
-                  url: https://vamsys.io
-                  icon: /assets/images/vamsys.png
-
-                - title: Flightsim.to
-                  url: https://flightsim.to
-                  icon: /assets/images/flightsim.to.svg
-
         - type: split-column
-          max-columns: 2
+          max-columns: 5
           widgets:
-            - type: iframe
-              title: Focus
-              source: http://localhost:6969/assets/focus.html
-              height: 240
-            - type: iframe
-              title: Streaks
-              source: http://localhost:6969/assets/streaks.html
-              height: 240
+          - type: bookmarks
+            groups:
+              - hide-arrow: true
+                same-tab: true
+                links:
+                  - title: Abaza
+                    url: https://abaza.dev
+                    icon: /assets/images/abaza738.png
 
-        - type: iframe
-          title: Progress
-          source: http://localhost:6969/assets/heatmap.html
-          height: 190
+                  - title: YouTube
+                    url: https://youtube.com
+                    icon: si:youtube
+
+                  - title: GitHub
+                    url: https://github.com/feed/
+                    icon: si:github
+
+                  - title: Reddit
+                    url: https://reddit.com
+                    icon: si:reddit
+
+                  - title: G-Mail
+                    utl: https://mail.google.com/
+                    icon: si:gmail
+
+                  - title: ProtonMail
+                    url: https://mail.protonmail.com
+                    icon: si:protonmail
+
+                  - title: POSCON HQ
+                    url: https://hq.poscon.net
+                    icon: /assets/images/poscon.ico
+
+          - type: bookmarks
+            groups:
+              - hide-arrow: true
+                same-tab: false
+                links:
+                  - title: Cloudflare
+                    url: https://dash.cloudflare.com
+                    icon: si:cloudflare
+
+                  - title: Claude AI
+                    url: https://claude.ai
+                    icon: si:anthropic
+
+                  - title: ChatGPT
+                    url: https://chatgpt.com
+                    icon: si:openai
+
+                  - title: Simbrief
+                    url: https://www.simbrief.com/home
+                    icon: /assets/images/navigraph.png
+
+                  - title: VAMSYS
+                    url: https://vamsys.io
+                    icon: /assets/images/vamsys.webp
+
+                  - title: Flightsim.to
+                    url: https://flightsim.to
+                    icon: /assets/images/flightsim.to.webp
 
         - type: videos
           title: YouTube
@@ -130,7 +125,7 @@
       widgets:
         - type: custom-api
           title: Prayer Times · Amman
-          cache: 6h
+          cache: 12h
           url: https://api.aladhan.com/v1/timingsByCity?city=Amman&country=Jordan&method=3
           template: |
             {{ $now := now | formatTime "15:04" }}
