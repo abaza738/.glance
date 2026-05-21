@@ -9,15 +9,6 @@
           hour-format: 24h
           hide-location: true
 
-        - type: custom-api
-          title: OJAI METAR
-          cache: 30m
-          url: https://aviationweather.gov/api/data/metar?ids=OJAI,OJAM&format=json
-          template: |
-            {{ $rt := .JSON.String "0.reportTime" }}<p class="color-subdue size-h6">{{ slice $rt 11 13 }}{{ slice $rt 14 16 }}Z</p>
-            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "0.rawOb" }}</p>
-            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "1.rawOb" }}</p>
-
         - type: clock
           hour-format: 24h
           timezones:
@@ -164,23 +155,11 @@
               </div>
             </div>
 
-        - type: releases
-          title: GitHub
-          cache: 1d
-          token: ${GITHUB_TOKEN}
-          repositories:
-            - glanceapp/glance
-            - jesseduffield/lazygit
-            - jesseduffield/lazydocker
-            - nuxt/nuxt
-            - nuxt/ui
-            - tauri-apps/tauri
-            - vuejs/core
-
-        - type: twitch-channels
-          title: Twitch!
-          channels:
-            - bashbunni
-            - danielroe
-            - ${SNOW}
-            - theprimeagen
+        - type: custom-api
+          title: OJAI METAR
+          cache: 30m
+          url: https://aviationweather.gov/api/data/metar?ids=OJAI,OJAM&format=json
+          template: |
+            {{ $rt := .JSON.String "0.reportTime" }}<p class="color-subdue size-h6">{{ slice $rt 11 13 }}{{ slice $rt 14 16 }}Z</p>
+            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "0.rawOb" }}</p>
+            <p class="margin-top-10" style="font-family: monospace; font-size: 11px; line-height: 1.6;">{{ .JSON.String "1.rawOb" }}</p>

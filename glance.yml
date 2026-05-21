@@ -42,8 +42,7 @@ theme:
 
 pages:
   !include: pages/home.yml
-  !include: pages/f1.yml
-  !include: pages/news.yml
+  !include: pages/feed.yml
 
   # Add more pages here:
   # - name: Your page name

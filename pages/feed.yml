@@ -1,4 +1,4 @@
-- name: News
+- name: Feed
   columns:
     - size: small
       widgets:
@@ -32,49 +32,48 @@
 
     - size: full
       widgets:
-        - type: rss
-          title: Middle East & Geopolitics
-          style: horizontal-cards
-          limit: 8
-          collapse-after: 4
-          feeds:
-            - url: https://www.aljazeera.com/xml/rss/all.xml
-              title: Al Jazeera
-            - url: https://feeds.bbci.co.uk/news/world/middle_east/rss.xml
-              title: BBC Middle East
-            - url: https://www.theguardian.com/world/middleeast/rss
-              title: The Guardian
+        - type: group
+          widgets:
+          - type: reddit
+            limit: 10
+            subreddit: formula1
+            show-thumbnails: false
+            style: horizontal-cards
+          - type: reddit
+            limit: 10
+            subreddit: technology
+            show-thumbnails: false
+            style: horizontal-cards
+          - type: reddit
+            limit: 10
+            subreddit: programmerhumor
+            show-thumbnails: false
+            style: horizontal-cards
 
-        - type: rss
-          title: Technology
-          style: horizontal-cards
-          limit: 12
-          collapse-after: 6
-          feeds:
-            - url: https://techcrunch.com/feed/
-              title: TechCrunch
-            - url: https://www.theverge.com/rss/index.xml
-              title: The Verge
-            - url: https://feeds.arstechnica.com/arstechnica/index
-              title: Ars Technica
+        - type: videos
+          title: F1 YouTube
+          limit: 10
+          channels:
+            - UCB_qr75-ydFVKSF9Dmo6izg # Formula 1 channel
 
     - size: small
       widgets:
-        - type: rss
-          title: Flight Simulation
-          limit: 6
-          collapse-after: 4
-          feeds:
-            - url: https://fselite.net/feed/
-              title: FSElite
-            - url: https://www.thresholdx.net/news/rss.xml
-              title: Threshold
-            - url: https://flightsim.to/rss/news
-              title: FlightSim.to
-
-        - type: reddit
-          title: r/aviation
-          subreddit: aviation
-          limit: 5
-          collapse-after: 3
-          show-thumbnails: false
+      - type: releases
+        title: GitHub
+        cache: 1d
+        token: ${GITHUB_TOKEN}
+        repositories:
+          - glanceapp/glance
+          - jesseduffield/lazygit
+          - jesseduffield/lazydocker
+          - nuxt/nuxt
+          - nuxt/ui
+          - tauri-apps/tauri
+          - vuejs/core
+      - type: twitch-channels
+        title: Twitch!
+        channels:
+          - bashbunni
+          - danielroe
+          - ${SNOW}
+          - theprimeagen
