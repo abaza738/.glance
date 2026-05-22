@@ -61,7 +61,7 @@
                     icon: si:reddit
 
                   - title: G-Mail
-                    utl: https://mail.google.com/
+                    url: https://mail.google.com/
                     icon: si:gmail
 
                   - title: ProtonMail
