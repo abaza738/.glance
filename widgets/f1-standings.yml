@@ -1,0 +1,33 @@
+- type: custom-api
+  title: Drivers
+  cache: 5m
+  url: http://${F1_API_URL}:4463/f1/drivers_standings/
+  template: |
+    <ul class="list collapsible-container" data-collapse-after="5">
+      {{ range $i, $v := .JSON.Array "drivers" }}
+      <li class="flex items-center {{ if eq $i 0 }}color-primary{{ else if eq $i 1 }}color-highlight{{ end }}">
+        <div class="grow min-width-0">
+          <span>{{ .String "position" }}. {{ .String "surname" }}</span>
+
+          {{ if .String "teamId" }}
+            <span class="size-h6">({{ .String "teamId" }})</span>
+          {{ end }}
+        </div>
+        <span class="shrink-0 text-right">{{ .String "points" }}</span>
+      </li>
+      {{ end }}
+    </ul>
+
+- type: custom-api
+  title: Constructors
+  cache: 5m
+  url: http://${F1_API_URL}:4463/f1/constructors_standings/
+  template: |
+    <ul class="list collapsible-container" data-collapse-after="5">
+      {{ range $i, $v := .JSON.Array "constructors" }}
+      <li class="flex items-center {{ if eq $i 0 }}color-primary{{ else if eq $i 1 }}color-highlight{{ end }}">
+        <span class="grow min-width-0">{{ .String "position" }}. {{ .String "team" }}</span>
+        <span class="shrink-0 text-right">{{ .String "points" }}</span>
+      </li>
+      {{ end }}
+    </ul>

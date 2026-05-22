@@ -30,6 +30,8 @@
               <p class="size-h6 color-subdue">{{ .JSON.String "date" }}</p>
             </div>
 
+        - $include: ../widgets/f1-next-race.yml
+
     - size: full
       widgets:
         - type: group
@@ -56,6 +58,11 @@
           channels:
             - UCB_qr75-ydFVKSF9Dmo6izg # Formula 1 channel
 
+        - type: split-column
+          max-columns: 2
+          widgets:
+            - $include: ../widgets/f1-standings.yml
+
     - size: small
       widgets:
       - type: releases
@@ -70,6 +77,7 @@
           - nuxt/ui
           - tauri-apps/tauri
           - vuejs/core
+
       - type: twitch-channels
         title: Twitch!
         channels:

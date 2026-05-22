@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  f1_api:
+    container_name: f1_api
+    image: skyallinott/f1_api:latest
+    environment:
+      - TIMEZONE=Asia/Amman # Specify your timezone.
+      - TRACK_COLOUR=#e5d486 # Specify desired track map color
+      - EVENT_DETAIL=main # Optional. main tracks qualis and races (inc. sprints), race tracks races. 
+    ports:
+      - 4463:4463
+    restart: unless-stopped

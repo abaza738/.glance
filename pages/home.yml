@@ -2,13 +2,6 @@
   columns:
     - size: small
       widgets:
-        - type: weather
-          title: Amman
-          location: Amman, Jordan
-          units: metric
-          hour-format: 24h
-          hide-location: true
-
         - type: clock
           hour-format: 24h
           timezones:
@@ -22,6 +15,47 @@
               label: Hayward
             - timezone: Australia/Brisbane
               label: Pookie Land
+
+        - type: custom-api
+          title: Prayer Times · Amman
+          cache: 12h
+          url: https://api.aladhan.com/v1/timingsByCity?city=Amman&country=Jordan&method=3
+          template: |
+            {{ $now := now | formatTime "15:04" }}
+            {{ $fajr := .JSON.String "data.timings.Fajr" }}
+            {{ $dhuhr := .JSON.String "data.timings.Dhuhr" }}
+            {{ $asr := .JSON.String "data.timings.Asr" }}
+            {{ $maghrib := .JSON.String "data.timings.Maghrib" }}
+            {{ $isha := .JSON.String "data.timings.Isha" }}
+            {{ $next := "Fajr" }}
+            {{ if gt $now $isha }}{{ $next = "Fajr" }}
+            {{ else if gt $now $maghrib }}{{ $next = "Isha" }}
+            {{ else if gt $now $asr }}{{ $next = "Maghrib" }}
+            {{ else if gt $now $dhuhr }}{{ $next = "Asr" }}
+            {{ else if gt $now $fajr }}{{ $next = "Dhuhr" }}
+            {{ end }}
+            <div class="flex flex-column gap-8">
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Fajr" }} color-subdue{{ end }}">Fajr</span>
+                <span{{ if eq $next "Fajr" }} class="color-primary"{{ end }}>{{ $fajr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Dhuhr" }} color-subdue{{ end }}">Dhuhr</span>
+                <span{{ if eq $next "Dhuhr" }} class="color-primary"{{ end }}>{{ $dhuhr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Asr" }} color-subdue{{ end }}">Asr</span>
+                <span{{ if eq $next "Asr" }} class="color-primary"{{ end }}>{{ $asr }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Maghrib" }} color-subdue{{ end }}">Maghrib</span>
+                <span{{ if eq $next "Maghrib" }} class="color-primary"{{ end }}>{{ $maghrib }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="size-h6{{ if ne $next "Isha" }} color-subdue{{ end }}">Isha</span>
+                <span{{ if eq $next "Isha" }} class="color-primary"{{ end }}>{{ $isha }}</span>
+              </div>
+            </div>
 
     - size: full
       widgets:
@@ -42,7 +76,7 @@
           - type: bookmarks
             groups:
               - hide-arrow: true
-                same-tab: true
+                same-tab: false
                 links:
                   - title: Abaza
                     url: https://abaza.dev
@@ -114,46 +148,12 @@
 
     - size: small
       widgets:
-        - type: custom-api
-          title: Prayer Times · Amman
-          cache: 12h
-          url: https://api.aladhan.com/v1/timingsByCity?city=Amman&country=Jordan&method=3
-          template: |
-            {{ $now := now | formatTime "15:04" }}
-            {{ $fajr := .JSON.String "data.timings.Fajr" }}
-            {{ $dhuhr := .JSON.String "data.timings.Dhuhr" }}
-            {{ $asr := .JSON.String "data.timings.Asr" }}
-            {{ $maghrib := .JSON.String "data.timings.Maghrib" }}
-            {{ $isha := .JSON.String "data.timings.Isha" }}
-            {{ $next := "Fajr" }}
-            {{ if gt $now $isha }}{{ $next = "Fajr" }}
-            {{ else if gt $now $maghrib }}{{ $next = "Isha" }}
-            {{ else if gt $now $asr }}{{ $next = "Maghrib" }}
-            {{ else if gt $now $dhuhr }}{{ $next = "Asr" }}
-            {{ else if gt $now $fajr }}{{ $next = "Dhuhr" }}
-            {{ end }}
-            <div class="flex flex-column gap-8">
-              <div class="flex justify-between">
-                <span class="size-h6{{ if ne $next "Fajr" }} color-subdue{{ end }}">Fajr</span>
-                <span{{ if eq $next "Fajr" }} class="color-primary"{{ end }}>{{ $fajr }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="size-h6{{ if ne $next "Dhuhr" }} color-subdue{{ end }}">Dhuhr</span>
-                <span{{ if eq $next "Dhuhr" }} class="color-primary"{{ end }}>{{ $dhuhr }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="size-h6{{ if ne $next "Asr" }} color-subdue{{ end }}">Asr</span>
-                <span{{ if eq $next "Asr" }} class="color-primary"{{ end }}>{{ $asr }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="size-h6{{ if ne $next "Maghrib" }} color-subdue{{ end }}">Maghrib</span>
-                <span{{ if eq $next "Maghrib" }} class="color-primary"{{ end }}>{{ $maghrib }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="size-h6{{ if ne $next "Isha" }} color-subdue{{ end }}">Isha</span>
-                <span{{ if eq $next "Isha" }} class="color-primary"{{ end }}>{{ $isha }}</span>
-              </div>
-            </div>
+        - type: weather
+          title: Amman
+          location: Amman, Jordan
+          units: metric
+          hour-format: 24h
+          hide-location: true
 
         - type: custom-api
           title: OJAI METAR
