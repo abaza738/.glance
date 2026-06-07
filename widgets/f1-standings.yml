@@ -1,6 +1,6 @@
 - type: custom-api
   title: Drivers
-  cache: 5m
+  cache: 1m
   url: http://${F1_API_URL}:4463/f1/drivers_standings/
   template: |
     <ul class="list collapsible-container" data-collapse-after="5">

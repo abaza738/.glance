@@ -76,7 +76,7 @@
           - type: bookmarks
             groups:
               - hide-arrow: true
-                same-tab: false
+                same-tab: true
                 links:
                   - title: Abaza
                     url: https://abaza.dev
@@ -109,7 +109,7 @@
           - type: bookmarks
             groups:
               - hide-arrow: true
-                same-tab: false
+                same-tab: true
                 links:
                   - title: Cloudflare
                     url: https://dash.cloudflare.com
