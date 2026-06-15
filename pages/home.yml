@@ -135,6 +135,8 @@
                     url: https://flightsim.to
                     icon: /assets/images/flightsim.to.webp
 
+        - $include: ../widgets/fifa-world-cup.yml
+
         - type: videos
           title: YouTube
           limit: 10
