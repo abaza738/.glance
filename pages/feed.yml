@@ -41,16 +41,16 @@
             subreddit: formula1
             show-thumbnails: false
             style: horizontal-cards
+
           - type: reddit
             limit: 10
             subreddit: technology
             show-thumbnails: false
             style: horizontal-cards
-          - type: reddit
-            limit: 10
-            subreddit: programmerhumor
-            show-thumbnails: false
-            style: horizontal-cards
+
+          - type: hacker-news
+            limit: 15
+            collapse-after: 5
 
         - type: videos
           title: F1 YouTube

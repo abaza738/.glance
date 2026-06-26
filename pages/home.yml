@@ -102,9 +102,9 @@
                     url: https://mail.protonmail.com
                     icon: si:protonmail
 
-                  - title: POSCON HQ
-                    url: https://hq.poscon.net
-                    icon: /assets/images/poscon.ico
+                  - title: Twitter
+                    url: https://twitter.com
+                    icon: si:twitter
 
           - type: bookmarks
             groups:
@@ -122,6 +122,14 @@
                   - title: ChatGPT
                     url: https://chatgpt.com
                     icon: si:openai
+
+                  - title: GitLab POSCON
+                    url: https://gitlab.poscon.com
+                    icon: si:gitlab
+
+                  - title: POSCON HQ
+                    url: https://hq.poscon.net
+                    icon: /assets/images/poscon.ico
 
                   - title: Simbrief
                     url: https://www.simbrief.com/home
