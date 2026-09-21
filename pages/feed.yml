@@ -78,6 +78,8 @@
           - tauri-apps/tauri
           - vuejs/core
 
+      - $include: ../widgets/f1-last-race.yml
+
       - type: twitch-channels
         title: Twitch!
         channels:
