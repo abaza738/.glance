@@ -102,9 +102,9 @@
                     url: https://mail.protonmail.com
                     icon: si:protonmail
 
-                  - title: Twitter
-                    url: https://twitter.com
-                    icon: si:twitter
+                  - title: Elbrus Airlines
+                    url: https://elbrus-airlines.com
+                    icon: /assets/images/elbrus.png
 
           - type: bookmarks
             groups:
@@ -123,9 +123,6 @@
                     url: https://chatgpt.com
                     icon: si:openai
 
-                  - title: GitLab POSCON
-                    url: https://gitlab.poscon.com
-                    icon: si:gitlab
 
                   - title: POSCON HQ
                     url: https://hq.poscon.net
